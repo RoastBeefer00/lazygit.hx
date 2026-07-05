@@ -11,13 +11,13 @@ Lazygit integration for [helix-steel](https://github.com/mattwparas/helix) — o
 ## Installation
 
 ```sh
-forge pkg install --git https://github.com/RoastBeefer00/helix-lazygit.git
+forge pkg install --git https://github.com/RoastBeefer00/lazygit.hx.git
 ```
 
 Or add to your `cog.scm` dependencies:
 
 ```scheme
-(#:name helix-lazygit #:git-url "https://github.com/RoastBeefer00/helix-lazygit.git")
+(#:name lazygit.hx #:git-url "https://github.com/RoastBeefer00/lazygit.hx.git")
 ```
 
 ## Usage
@@ -25,7 +25,7 @@ Or add to your `cog.scm` dependencies:
 In your `init.scm`:
 
 ```scheme
-(require "helix-lazygit/lazygit.scm")
+(require "lazygit.hx/lazygit.scm")
 
 (keymap (global)
         (normal (space (g ":lazygit"))))
