@@ -38,7 +38,12 @@
         (set! *lazygit-doc-id*
               (term-buffer-spawn!
                (string-append "cd " (helix-find-workspace) " && exec lazygit")))
-        (set-bufferline-name! "lazygit"))))
+        ;; The buffer isn't current yet at this point - it's revealed once
+        ;; lazygit produces its first real output, so there's no empty-buffer
+        ;; flash during its own startup - hence naming it by doc-id here
+        ;; rather than set-bufferline-name!, which only affects the current
+        ;; buffer.
+        (document-set-bufferline-name! *lazygit-doc-id* "lazygit"))))
 
 ;;@doc
 ;; Close lazygit if currently open (also kills the process, if it's still
