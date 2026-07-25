@@ -1,10 +1,9 @@
 (define package-name 'lazygit.hx)
-(define version "0.1.0")
+(define version "0.2.0")
 
-;; steel-pty must export: make-terminal-renderer, make-terminal-with-renderer,
-;; term-resize-from-term, terminal-event-handler, Terminal-*vte*, Terminal-*pty-process*,
-;; Terminal-kill-switch, Terminal-active, Terminal-focused?, Terminal-name, show-term
-(define dependencies
-  '((#:name steel-pty #:git-url "https://github.com/mattwparas/steel-pty.git")))
+;; No dependencies: uses helix-steel's native terminal-buffer-mode
+;; (term-buffer-spawn!/term-buffer-alive?, in helix/static.scm) instead of
+;; the steel-pty dylib + term.scm component system.
+(define dependencies '())
 
 (define dylibs '())

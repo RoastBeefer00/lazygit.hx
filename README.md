@@ -1,12 +1,11 @@
 # helix-lazygit
 
-Lazygit integration for [helix-steel](https://github.com/mattwparas/helix) — opens lazygit as a full-screen terminal overlay inside helix. No terminal multiplexer needed.
+Lazygit integration for [helix-steel](https://github.com/mattwparas/helix) — opens lazygit as a real terminal buffer inside helix (helix-steel's native terminal-buffer-mode). No terminal multiplexer needed.
 
 ## Requirements
 
-- [mattwparas/helix](https://github.com/mattwparas/helix) built with the `steel` feature
+- [mattwparas/helix](https://github.com/mattwparas/helix) built with the `steel` feature, on a branch/build that includes native terminal-buffer-mode (`term-buffer-spawn!` in `helix/static.scm`)
 - `lazygit` on your `$PATH`
-- `steel-pty` (installed automatically via `forge install`)
 
 ## Installation
 
@@ -40,9 +39,9 @@ In your `init.scm`:
 
 ### Controls
 
-- **`q`** — quit lazygit and return to helix (uses lazygit's own quit binding)
-- **`Ctrl-Esc`** — force-close the overlay without quitting lazygit's process
+- **`q`** — quit lazygit and return to helix (uses lazygit's own quit binding; the buffer closes itself as soon as the process exits)
+- **`<F12>`** — detach back to Normal mode without going through lazygit (e.g. to force-close via `:close-lazygit` or `:bc!` if lazygit is unresponsive)
 
 ## How it works
 
-helix-lazygit spawns lazygit in a PTY, renders its VTE cell output directly into a helix component, and clips the editor to hide it completely while lazygit is open. The shell is read from `$SHELL` and the working directory is set to the helix workspace root.
+`:lazygit` opens a real Helix buffer running `lazygit` in a PTY (via `term-buffer-spawn!`), `cd`'d into the helix workspace root and `exec`'d so no wrapper shell survives. Because it's a normal buffer, it participates in bufferline/split/buffer-navigation like anything else, and closes itself automatically the moment the lazygit process exits, however that happens.
